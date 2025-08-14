@@ -1,77 +1,34 @@
 ---
 title: 'Product Overview'
-description: 'Discover the key components and features of the SignPact platform'
+description: 'Routes, protections, and main flows in the SignPact app.'
 ---
 
-# SignPact Platform Overview
+# App Routes and Flows
 
-SignPact is a comprehensive document signing and management platform designed to modernize your document workflows. Our solution combines powerful functionality with an intuitive interface to deliver a seamless experience for all users.
+This page orients you to app routes, protections, and core flows as implemented.
 
-## Core Functionality
+## Routes
 
-Based on our current implementation, SignPact provides:
+- Public: `/`, `/workflow-demo`, `/roi-calculator`, `/problem-details`, `/waitlist`, `/join-workspace`, `/login`, `/login/credentials`, `/pricing`, `/plan-comparison`, `/privacy`, `/terms`, `/vision`, `/compliance`, `/docs`, `/signature-sent/:id`, `/view/:id`
+- Auth required: `/dashboard`, `/preview/:id`, `/contacts`, `/settings`, `/redlining`, `/redlining/:documentId`
+- Payment‑gated: `/new-document`, `/generation`
+- Token allowed (recipients): `/document/:id?token=...`
 
-### Electronic Signatures
+## Core flows
 
-Our advanced e-signature technology enables you to:
-- Send documents for legally binding electronic signatures
-- Support for drawn, typed, and uploaded signature styles
-- Configure sequential signing workflows for multiple participants
-- Track real-time signature status and completion
-- Maintain comprehensive audit trails for compliance
+- Dashboard: folders, search, filters, status, move/hide
+- New Document: upload → place fields → assign signers → create request
+- Document: view, version history, download with embedded signatures, access control
+- Redlining: AI analysis → annotations → summary
+- Contacts: CRUD and search
+- Settings: profile, preferences, signature, onboarding reset, security, billing and seats
+- Generation: datasets and available docs (payment‑gated)
 
-### AI-Powered Contract Analysis
+## Permissions and tokens
 
-Leverage artificial intelligence to understand your documents:
-- Automatic contract analysis and risk identification
-- Key clause detection and summarization
-- Identification of potential issues or inconsistencies
-- AI-generated summaries of document content
+- Bearer JWT is required for authenticated routes
+- Signature token in query string authorizes limited recipient actions (no login)
 
-### Document Management
+## Pricing stance
 
-A centralized hub for all your documents:
-- Secure document storage with version control
-- Document categorization and tagging
-- Custom folder structures and organization
-- Search and filter capabilities
-- Version history tracking
-
-### Collaboration Features
-
-Work efficiently with internal and external stakeholders:
-- Document redlining and change tracking
-- Comment and feedback system
-- Access controls and permission management
-- Document sharing with customizable permission levels
-
-### Vendor Management
-
-Streamline your relationship with suppliers and partners:
-- Vendor catalog and organization
-- Contract date tracking (execution, renewal, expiration)
-- Counterparty contact information storage
-- Alerts for important contract dates
-
-## Platform Architecture
-
-SignPact is built on a modern, scalable architecture:
-
-- **Single-Page Application**: React-based frontend for a responsive user experience
-- **Secure Backend**: API-driven architecture with robust authentication
-- **Cloud Infrastructure**: Hosted on reliable cloud services for high availability
-- **Security-First Design**: End-to-end encryption and security best practices
-- **Mobile Responsive**: Access your documents from any device
-
-## User Interface
-
-Our user interface follows modern design principles:
-
-- **Clean, Intuitive Design**: Apple-inspired aesthetics with a focus on usability
-- **Responsive Layout**: Works seamlessly across desktop and mobile devices
-- **Contextual Navigation**: Easy access to relevant tools when needed
-- **Streamlined Workflows**: Minimal steps to accomplish common tasks
-
-## Next Steps
-
-Explore our detailed [features documentation](/product/features) to learn more about specific capabilities, or check out our [security information](/product/security) to understand our approach to protecting your data. 
+Custom pricing; use the Workflow Demo and ROI Calculator to evaluate value.

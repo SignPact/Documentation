@@ -1,4 +1,41 @@
 ---
+title: 'Quickstart'
+description: 'Log in, upload a document, place fields, assign signers, and send.'
+---
+
+# Quickstart
+
+This guide gets you from login to your first signed document.
+
+## Access & Authentication
+
+- Google OAuth or credentials on `/login`
+- Recipients can access a signing flow via a signature token link: `/document/:id?token=...` (no login required)
+
+## Dashboard tour
+
+Go to `/dashboard` to see your documents and folders. Key areas:
+
+- New Document (payment‑gated)
+- Waiting Signatures and Completed stats
+- Search, folders, filters, move/hide
+
+## Create and send for signature
+
+1. Open New Document (`/new-document`)
+2. Upload a PDF/DOC/DOCX
+3. Place signature and form fields; assign each to the right contact
+4. Complete to create a signature request
+5. Recipients receive a secure token link to review/sign
+
+Notes
+
+- New Document and Generation are payment‑gated features
+- Public view: `/view/:id` is read‑only
+- Version history is available to authorized users
+
+Next: Learn field placement and signer assignment in depth → [Upload & place fields](/guides/upload-and-place-fields)
+---
 title: 'Quickstart Guide'
 description: 'Get up and running with SignPact in minutes'
 ---

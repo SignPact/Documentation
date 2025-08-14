@@ -5,10 +5,10 @@ description: 'Reference for the SignPact API endpoints'
 
 # API Endpoints
 
-The SignPact API provides a comprehensive set of endpoints for interacting with documents, users, and signatures.
+This overview reflects the endpoints used by the current frontend. Treat it as a usage map; align any diffs with your OpenAPI before publishing.
 
 <Note>
-All API requests require authentication with a valid JWT token as documented in the [Authentication](/api-reference/authentication) section.
+Authenticated routes require a valid JWT (see [Authentication](/api-reference/authentication)). Some recipient flows use a signature token via query string and do not require Authorization headers.
 </Note>
 
 ## Base URL
@@ -17,7 +17,7 @@ All API requests require authentication with a valid JWT token as documented in 
 http://localhost:8000/api
 ```
 
-In production, this will be replaced with your deployed API URL.
+In production, use your deployed API URL.
 
 ## Document Endpoints
 
@@ -76,42 +76,21 @@ GET /documents/:id
 
 ### Upload Document
 
-Uploads a new document to the system.
+Uploads a new document.
 
 ```
 POST /documents
 ```
 
-**Request Body**
+Request is multipart/form-data (file upload). On success, returns the new document with status `draft`.
 
-```json
-{
-  "name": "Contract Agreement",
-  "file": "Base64 encoded file"
-}
-```
-
-**Response**
-
-```json
-{
-  "id": "document_id",
-  "name": "Contract Agreement",
-  "status": "draft",
-  "ownerId": "user_id",
-  "createdAt": "2023-04-01T10:30:00Z"
-}
-```
-
-### Download Document
-
-Downloads a document file.
+### Download Document (embedded signatures)
 
 ```
-GET /documents/:id/file
+GET /documents/:id/download
 ```
 
-Returns the document file as a downloadable response.
+Returns the signed PDF. Supports signature token query param when used by recipients.
 
 ### Get Document Permissions
 
@@ -182,34 +161,7 @@ GET /auth/user
 }
 ```
 
-### Register User
-
-Creates a new user account.
-
-```
-POST /auth/register
-```
-
-**Request Body**
-
-```json
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "password": "securepassword"
-}
-```
-
-**Response**
-
-```json
-{
-  "id": "user_id",
-  "name": "John Doe",
-  "email": "john@example.com",
-  "token": "jwt_token"
-}
-```
+> Note: Self‑serve signup is disabled; users are invited or join a workspace.
 
 ### User Login
 
@@ -257,7 +209,7 @@ POST /documents/:id/signatures
     {
       "email": "signer@example.com",
       "name": "Signer Name",
-      "order": 1 // Order in which this person should sign
+      "signatureFields": [ { "id": "field-id", "type": "signature", "page": 1, "x": 100, "y": 200, "width": 120, "height": 40, "required": true } ]
     }
   ],
   "message": "Please sign this document",
@@ -312,30 +264,46 @@ GET /signatures/:id
 }
 ```
 
-### Sign Document
+### Recipient token flow
 
-Signs a document (for the authenticated user).
+Recipients access signing via `/document/:id?token=...`. The token authorizes limited actions without a bearer token.
+
+## Redlining (AI)
 
 ```
-POST /signatures/:id/sign
+GET /documents/:id/redlining/status
+POST /documents/:id/redlining/ai-analyze
+GET /documents/:id/redlining/annotations
+POST /documents/:id/redlining/summary
 ```
 
-**Request Body**
+## Contacts
 
-```json
-{
-  "signature": "Base64 encoded signature image or data",
-  "signatureType": "drawn" // Can be "drawn", "typed", or "uploaded"
-}
+```
+GET /contacts
+POST /contacts
+PATCH /contacts/:id
+DELETE /contacts/:id
 ```
 
-**Response**
+## Generation (payment‑gated)
 
-```json
-{
-  "success": true,
-  "message": "Document signed successfully"
-}
+```
+GET /generation/datasets
+POST /generation/datasets
+POST /generation/datasets/:id/process
+GET /generation/documents
+```
+
+## Workspace & Billing
+
+```
+GET /billing/subscription
+POST /billing/portal
+POST /billing/checkout-session
+POST /billing/update-seats
+POST /workspace/remove-member
+POST /workspace/leave
 ```
 
 ## Error Handling

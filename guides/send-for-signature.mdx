@@ -1,0 +1,20 @@
+---
+title: 'Send for signature'
+description: 'Create signature requests and use tokened links for recipients.'
+---
+
+# Send for signature
+
+After placing fields, completing the flow creates a signature request.
+
+## Signers & fields
+
+- Fields are grouped by signer (email + name)
+- Each signer receives a tokened link to review/sign
+
+## Recipient link
+
+`/document/:id?token=<signatureToken>` authorizes limited actions without login. The backend validates token and enforces permissions.
+
+Next: [Permissions & public view](/guides/permissions-and-public-view)
+

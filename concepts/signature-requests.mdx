@@ -1,0 +1,18 @@
+---
+title: 'Signature requests'
+description: 'Signers, fields, and token links.'
+---
+
+# Signature requests
+
+Signature requests are created after you upload a document and place fields.
+
+## Signers
+
+- Each signer has email, name, and assigned fields
+- Field data includes page, x/y, width/height, and required
+
+## Token links
+
+Recipients get `/document/:id?token=...` links to review/sign without login. Tokens are validated server‑side with limited scope.
+

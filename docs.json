@@ -31,50 +31,63 @@
       "url": "api-reference"
     }
   ],
-  "anchors": [
-    {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
-    },
-    {
-      "name": "Community",
-      "icon": "discord",
-      "url": "https://discord.gg/mintlify"
-    },
-    {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
-    }
-  ],
+  "anchors": [],
   "navigation": {
     "groups": [
       {
         "group": "Getting Started",
-        "pages": ["introduction", "quickstart", "faq"]
+        "pages": [
+          "introduction",
+          "quickstart",
+          "faq"
+        ]
       },
       {
-        "group": "Product",
-        "pages": ["product/overview", "product/features", "product/security"]
+        "group": "Concepts",
+        "pages": [
+          "concepts/documents",
+          "concepts/signature-requests",
+          "concepts/redlining",
+          "concepts/folders",
+          "concepts/billing-workspaces"
+        ]
       },
       {
-        "group": "Pricing",
-        "pages": ["pricing/plans", "pricing/enterprise"]
+        "group": "Guides",
+        "pages": [
+          "guides/upload-and-place-fields",
+          "guides/send-for-signature",
+          "guides/permissions-and-public-view",
+          "guides/ai-redlining",
+          "guides/contacts",
+          "guides/workspaces-and-billing",
+          "guides/onboarding"
+        ]
+      },
+      {
+        "group": "Pricing & ROI",
+        "pages": [
+          "pricing/plans",
+          "pricing/roi-calculator",
+          "pricing/workflow-demo"
+        ]
+      },
+      {
+        "group": "Security & Compliance",
+        "pages": ["product/security"]
       },
       {
         "group": "API Reference",
         "pages": ["api-reference/authentication", "api-reference/endpoints"]
       },
       {
-        "group": "Integrations",
-        "pages": ["integrations/overview"]
+        "group": "Help",
+        "pages": ["faq"]
       }
     ]
   },
   "footerSocials": {
-    "twitter": "https://twitter.com/yourusername",
-    "github": "https://github.com/yourusername",
-    "linkedin": "https://www.linkedin.com/in/yourusername"
+    "github": "https://github.com/signpact",
+    "linkedin": "https://www.linkedin.com/company/signpact/"
   }
 } 
