@@ -1,20 +1,15 @@
 ---
-title: 'API Authentication'
-description: 'Learn how to authenticate with the SignPact API'
+title: 'Authentication'
+description: 'App login (OAuth/credentials), JWT bearer, and signature token links.'
 ---
 
-# API Authentication
+# Authentication
 
-SignPact uses bearer token authentication for API requests. This guide explains how to authenticate with our API.
+SignPact has three authentication contexts:
 
-## Authentication Flow
-
-Based on our frontend implementation, SignPact uses a JWT (JSON Web Token) based authentication system:
-
-1. Users authenticate with their email and password
-2. Upon successful authentication, the server issues a JWT token
-3. This token must be included in the Authorization header of all API requests
-4. Tokens have an expiration time, after which they must be refreshed
+1. App login (Google OAuth or credentials)
+2. Authenticated API requests (JWT bearer)
+3. Signature token links for recipients (no login required)
 
 ## Getting a Token
 
@@ -46,9 +41,9 @@ async function login(email, password) {
 }
 ```
 
-### OAuth Authentication
+### Google OAuth
 
-SignPact also supports Google OAuth authentication as shown in our codebase:
+SignPact supports Google OAuth in the web app:
 
 ```javascript
 // Example from frontend/src/App.js
@@ -59,9 +54,9 @@ SignPact also supports Google OAuth authentication as shown in our codebase:
 </GoogleOAuthProvider>
 ```
 
-To use Google OAuth, implement the OAuth 2.0 flow following Google's guidelines, then exchange the OAuth token for a SignPact JWT token.
+After Google sign‑in, the frontend stores a SignPact JWT for API calls.
 
-## Using the Token
+## Using the JWT bearer token
 
 Include the token in the Authorization header of all API requests:
 
@@ -102,7 +97,7 @@ async function fetchWithAuth(endpoint, options = {}) {
 }
 ```
 
-## Token Expiration and Refresh
+## Token expiration and refresh
 
 JWT tokens have an expiration time. When a token expires, your application should detect the 401 Unauthorized response and handle it appropriately:
 
@@ -165,6 +160,16 @@ Authentication-related error responses:
 | 403 | Forbidden - Valid token but insufficient permissions | Inform user they lack permission |
 | 422 | Validation Error - Malformed authentication request | Check request format and credentials |
 
-## Next Steps
+## Signature token links
+
+Recipients access review/sign flows via a time‑limited token embedded in the URL:
+
+```
+/document/:id?token=<signatureToken>
+```
+
+When present, no `Authorization` header is required; the backend authorizes limited actions based on the token.
+
+## Next steps
 
 Now that you understand how to authenticate with the SignPact API, proceed to the [API Endpoints](/api-reference/endpoints) documentation to learn about the available endpoints and how to use them. 

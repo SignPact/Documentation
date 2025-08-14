@@ -1,0 +1,18 @@
+---
+title: 'Permissions & public view'
+description: 'Manage access and share read‑only links.'
+---
+
+# Permissions & public view
+
+Use the access control panel in the Document view to add/remove collaborators and adjust roles (view/edit/sign/share).
+
+## Public view
+
+`/view/:id` provides a read‑only view for broader sharing. No edits or signing.
+
+## Signature token vs public link
+
+- Token link (`/document/:id?token=...`): recipient signs/reviews without login
+- Public link (`/view/:id`): read‑only, no signing
+
